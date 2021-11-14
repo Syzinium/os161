@@ -33,8 +33,10 @@
 #include <mainbus.h>
 
 
+// TODO what is virtual address and what is start.S
 vaddr_t firstfree;   /* first free virtual address; set by start.S */
 
+// TODO paddr_t = pointer addr?
 static paddr_t firstpaddr;  /* address of first free physical page */
 static paddr_t lastpaddr;   /* one past end of last free physical page */
 
@@ -68,6 +70,7 @@ ram_bootstrap(void)
 	 * Convert to physical address.
 	 */
 	firstpaddr = firstfree - MIPS_KSEG0;
+    // so which means first paddr = (first free virtual address) - (kseg0 (kernel, unmapped, cached))
 
 	kprintf("%uk physical memory available\n",
 		(lastpaddr-firstpaddr)/1024);
